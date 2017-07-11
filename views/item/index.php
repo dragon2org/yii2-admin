@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use pd\admin\components\RouteRule;
+use yii\helpers\Url;
+use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -31,36 +33,47 @@ unset($rules[RouteRule::RULE_NAME]);
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
             </div>
-            <h4 class="panel-title">DataTable - Fixed Columns</h4>
+            <h4 class="panel-title">表单</h4>
         </div>
-        <div class="alert alert-info fade in">
-            <button type="button" class="close" data-dismiss="alert">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            At times it can be useful to ensure that column titles will remain always visible on a table, even when a user scrolls down a table. The FixedHeader plug-in for DataTables will float the 'thead' element above the table at all times to help address this issue. The column titles also remain click-able to perform sorting.
-        </div>
+        <?= \pd\coloradmin\widgets\Alert::widget() ?>
         <div class="panel-body">
             <table id="data-table" class="table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>名称</th>
                     <th>规格名称</th>
                     <th>描述</th>
-                    <th>操作</th>
+                    <th width="10%">操作</th>
                 </tr>
                 </thead>
-                <?php foreach($dataProvider->getModels() as $model): ?>
+                <tbody>
+                <?php foreach($dataProvider->getModels() as $index => $model): ?>
                     <tr class="">
-                        <td></td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td>X</td>
+                        <td><?= $model->name ?></td>
+                        <td><?= $model->ruleName ?></td>
+                        <td><?= $model->description ?></td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="<?= Url::to(['role/view', 'id'=> $model->name]) ?>"><span class="btn btn-info m-r-1 m-b-5 btn-xs">详情</span></a>
+                                <a href="<?= Url::to(['role/update', 'id'=> $model->name]) ?>"><span class="btn btn-warning m-r-1 m-b-5 btn-xs">编辑</span></a>
+                                <a href="<?= Url::to(['role/delete', 'id' => $model->name]) ?>" data-confirm="确认删除此数据?" data-method="post" ><span class="btn btn-danger m-r-1 m-b-5 btn-xs">删除</span></a>
+                            </div>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
             </table>
+            <?= LinkPager::widget([
+                'pagination'=>$dataProvider->getPagination(),
+                'firstPageLabel'=> '首页',
+                'lastPageLabel'=> '末页',
+                'nextPageLabel'=> '前一页',
+                'prevPageLabel'=> '后一页',
+                'hideOnSinglePage' => false,
+                'options' => [
+                        'class' => 'pagination pull-right'
+                ]
+            ]) ?>
         </div>
     </div>
     <!-- end panel -->
