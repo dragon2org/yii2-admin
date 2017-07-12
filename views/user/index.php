@@ -37,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <th>名称</th>
                     <th>邮箱</th>
                     <th>创建时间</th>
-                    <th width="20%">用户状态</th>
-                    <th width="10%">操作</th>
+                    <th>用户状态</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,11 +48,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         <td><?= $model->username ?></td>
                         <td><?= $model->email ?></td>
                         <td><?= \pd\helpers\Yii2Helpers::dateFormat($model->created_at) ?></td>
-                        <td><?php
+                        <td align="center"><?php
                             echo $model->status == User::STATUS_ACTIVE ? '<span class="badge badge-success radius">正常</span>' : '<span class="badge badge-warning radius">冻结</span>';
 
                             ?></td>
-                        <td>
+                        <td align="center">
                             <div class="btn-group">
                                 <a href="<?= Url::to(['user/view', 'id'=> $model->id]) ?>"><span class="btn btn-info m-r-1 m-b-5 btn-xs">详情</span></a>
                                 <a href="<?= Url::to(['user/update', 'id'=> $model->id]) ?>"><span class="btn btn-warning m-r-1 m-b-5 btn-xs">编辑</span></a>

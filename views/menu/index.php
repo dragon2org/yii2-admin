@@ -38,23 +38,23 @@ $this->params['breadcrumbs'][] = $this->title;
             <table id="data-table" class="table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>#</th>
                     <th>名称</th>
-                    <th>父级</th>
+                    <th>上级菜单</th>
                     <th>路由</th>
                     <th>描述</th>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach($dataProvider->getModels() as $model): ?>
+                <?php foreach($dataProvider->getModels() as $index => $model): ?>
                     <tr class="">
-                        <td></td>
+                        <td><?= \pd\helpers\Yii2Helpers::serialColumn($dataProvider, $index) ?></td>
                         <td><?= $model->name ?></td>
                         <td><?= $model->getMenuParentName() ?></td>
                         <td><?= $model->route ?></td>
                         <td><?= $model->order ?></td>
-                        <td>
+                        <td align="center">
                             <div class="btn-group">
                                 <a href="<?= Url::to(['menu/view', 'id'=> $model->id]) ?>"><span class="btn btn-info m-r-1 m-b-5 btn-xs">详情</span></a>
                                 <a href="<?= Url::to(['menu/update', 'id'=> $model->id]) ?>"><span class="btn btn-warning m-r-1 m-b-5 btn-xs">编辑</span></a>
@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'lastPageLabel'=> '末页',
                 'nextPageLabel'=> '前一页',
                 'prevPageLabel'=> '后一页',
-                'hideOnSinglePage' => 'false',
+                'hideOnSinglePage' => false,
                 'options' => [
                     'class' => 'pagination pull-right'
                 ]

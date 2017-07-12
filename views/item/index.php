@@ -43,7 +43,7 @@ unset($rules[RouteRule::RULE_NAME]);
                     <th>名称</th>
                     <th>规格名称</th>
                     <th>描述</th>
-                    <th width="10%">操作</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -52,7 +52,7 @@ unset($rules[RouteRule::RULE_NAME]);
                         <td><?= $model->name ?></td>
                         <td><?= $model->ruleName ?></td>
                         <td><?= $model->description ?></td>
-                        <td>
+                        <td align="center">
                             <div class="btn-group">
                                 <a href="<?= Url::to(['role/view', 'id'=> $model->name]) ?>"><span class="btn btn-info m-r-1 m-b-5 btn-xs">详情</span></a>
                                 <a href="<?= Url::to(['role/update', 'id'=> $model->name]) ?>"><span class="btn btn-warning m-r-1 m-b-5 btn-xs">编辑</span></a>
